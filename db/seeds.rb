@@ -5,3 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+project = Project.create(
+  name: 'Dashboard',
+  location: 'London'
+)
+
+team_member = TeamMember.create(
+  name: 'Richard',
+  role: 'Developer',
+  project: project
+)
+
+team_member_two = TeamMember.create(
+  name: 'Joe',
+  role: 'Tech Lead',
+  project: project
+)
+
+puts "Seed successfully created"
