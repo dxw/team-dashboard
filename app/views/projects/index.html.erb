@@ -1,1 +1,6 @@
-<h1>"Dashboard"</h1>
+<h1>Projects</h1>
+
+<% @projects.each do |project| %>
+  <ul><h2><%= project.name %></h2>
+  <h3><%= project.location %></h3></ul>
+<% end %>
