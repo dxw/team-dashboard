@@ -20,6 +20,7 @@ ENV RACK_ENV=${RAILS_ENV:-production}
 # create and use application home
 ENV APP_NAME team-dashboard
 ENV APP_PATH /srv/team-dashboard
+COPY docker-entrypoint.sh .
 RUN mkdir -p $APP_PATH
 WORKDIR $APP_PATH
 
