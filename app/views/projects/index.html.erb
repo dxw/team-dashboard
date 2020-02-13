@@ -1,4 +1,9 @@
 <h1>Projects</h1>
 <% @projects.each do |project| %>
   <h2><%= project.name %></h2>
+    <% project.team_members.each do |team_member| %>
+      <ul>
+        <li><%= team_member.name %></li>
+      </ul>
+    <% end %>
 <% end %>
