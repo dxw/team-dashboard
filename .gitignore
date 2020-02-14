@@ -27,3 +27,6 @@
 .env
 
 node_modules/
+
+#Ignore OSX DS_Store
+.DS_Store
