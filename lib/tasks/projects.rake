@@ -2,7 +2,7 @@ require 'dotenv/tasks'
 
 namespace :projects do
   desc 'Fetch a list of users and their projects from 10,000ft'
-  task fetch: :dotenv do
+  task fetch: [:dotenv, :environment] do
     tenk = Tenk.new(
       user_id: ENV.fetch('TENK_USER_ID'),
       password: ENV.fetch('TENK_PASSWORD'),
@@ -15,7 +15,8 @@ namespace :projects do
     users = tenk.users.list.data
 
     users.each do |user|
-      puts user.display_name
+      team_member = TeamMember.create!(name: user.first_name + " " + user.last_name, tenk_id: user.id)
+      puts team_member
 
       assignments = tenk.users.assignments.list(
         user.id,
