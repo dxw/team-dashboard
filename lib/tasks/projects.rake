@@ -15,8 +15,8 @@ namespace :projects do
     users = tenk.users.list.data
 
     users.each do |user|
-      team_member = TeamMember.create!(name: user.first_name + " " + user.last_name, tenk_id: user.id)
-      puts team_member
+      puts user.display_name
+      team_member = TeamMember.find_or_create_by!(name: user.display_name, tenk_id: user.id)
 
       assignments = tenk.users.assignments.list(
         user.id,
