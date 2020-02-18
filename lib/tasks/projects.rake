@@ -26,8 +26,20 @@ namespace :projects do
 
       assignments.each do |assignment|
         puts "  #{projects[assignment.assignable_id].name};"
+        puts "  #{projects[assignment.assignable_id]};"
 
-        project = Project.find_or_create_by!(name: projects[assignment.assignable_id].name) if projects[assignment.assignable_id].name
+        if projects[assignment.assignable_id].name
+          project = Project.find_or_create_by!(
+            name: projects[assignment.assignable_id].name,
+            starts_at: projects[assignment.assignable_id].starts_at,
+            ends_at: projects[assignment.assignable_id].ends_at,
+            client: projects[assignment.assignable_id].client,
+            phase_name: projects[assignment.assignable_id].phase_name,
+            archived: projects[assignment.assignable_id].archived
+            )
+          team_member.project = project
+          team_member.save!
+        end
       end
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_161107) do
+ActiveRecord::Schema.define(version: 2020_02_18_120410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(version: 2020_02_17_161107) do
     t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "starts_at"
+    t.string "ends_at"
+    t.string "client"
+    t.string "phase_name"
+    t.boolean "archived"
   end
 
   create_table "team_members", force: :cascade do |t|
