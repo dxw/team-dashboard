@@ -26,6 +26,8 @@ namespace :projects do
 
       assignments.each do |assignment|
         puts "  #{projects[assignment.assignable_id].name};"
+
+        project = Project.find_or_create_by!(name: projects[assignment.assignable_id].name) if projects[assignment.assignable_id].name
       end
     end
   end
