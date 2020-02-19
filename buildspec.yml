@@ -14,6 +14,9 @@ phases:
     commands:
       - echo Testing the newly built Docker image...
       - docker run --name test -d -e RAILS_ENV=test $CONTAINER_NAME:test /bin/bash -c "tail -f /dev/null"
+      - git config --global credential.helper store
+      - git config --global url."https://github.com/".insteadOf 'git@github.com:'
+      - echo "https://$GIT_USERNAME:$GIT_PASSWORD@github.com" > /root/.git-credentials
       - docker exec test bundle install --with test --retry 3 --jobs 20
       - docker rm -f test
   post_build:
