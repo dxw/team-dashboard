@@ -12,7 +12,7 @@ namespace :projects do
       hash[project_id] = tenk.projects.get(project_id)
     }
 
-    users = tenk.users.list.data
+    users = tenk.users.list(per_page: 100).data
 
     users.each do |user|
       puts user.display_name
