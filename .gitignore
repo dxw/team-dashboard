@@ -22,3 +22,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore .env, as it contains secrets (there .env.example as a template)
+.env
+
+node_modules/
