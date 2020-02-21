@@ -34,6 +34,9 @@ COPY Gemfile $APP_PATH/Gemfile
 COPY Gemfile.lock $APP_PATH/Gemfile.lock
 RUN chown -R app:app $APP_PATH
 
+ARG GITHUB_TOKEN
+ARG BUNDLE_GITHUB__COM=${GITHUB_TOKEN}:x-oauth-basic
+
 USER app
 # bundle ruby gems based on the current environment, default to production
 RUN \

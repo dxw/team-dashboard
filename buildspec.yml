@@ -9,7 +9,7 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - echo Building the Docker image...
       - chmod +x docker-entrypoint.sh
-      - docker build --build-arg RAILS_ENV=$INFRA_ENV -t $CONTAINER_NAME:test .
+      - docker build --build-arg RAILS_ENV=$INFRA_ENV --build-arg GITHUB_TOKEN=$GIT_PASSWORD -t $CONTAINER_NAME:test .
   build:
     commands:
       - echo Testing the newly built Docker image...
