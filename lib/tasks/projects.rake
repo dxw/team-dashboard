@@ -12,11 +12,17 @@ namespace :projects do
       hash[project_id] = tenk.projects.get(project_id)
     }
 
-    users = tenk.users.list.data
+    users = tenk.users.list(per_page: 100).data
 
     users.each do |user|
       puts user.display_name
-      team_member = TeamMember.find_or_create_by!(name: user.display_name, tenk_id: user.id)
+      team_member = TeamMember.find_or_create_by!(
+        name: user.display_name,
+        tenk_id: user.id,
+        role: user.role,
+        thumbnail: user.thumbnail,
+        billable: user.billable
+      )
 
       assignments = tenk.users.assignments.list(
         user.id,
@@ -26,8 +32,6 @@ namespace :projects do
 
       assignments.each do |assignment|
         puts "  #{projects[assignment.assignable_id].name};"
-        puts "  #{projects[assignment.assignable_id]};"
-
         if projects[assignment.assignable_id].name
           project = Project.find_or_create_by!(
             name: projects[assignment.assignable_id].name,
