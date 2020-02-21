@@ -15,7 +15,7 @@ namespace :projects do
     users = tenk.users.list(per_page: 100).data
 
     users.each do |user|
-      puts user
+      puts user.display_name
       team_member = TeamMember.find_or_create_by!(
         name: user.display_name,
         tenk_id: user.id,
@@ -31,18 +31,22 @@ namespace :projects do
       ).data
 
       assignments.each do |assignment|
-        puts "  #{projects[assignment.assignable_id].name};"
+        puts " #{projects[assignment.assignable_id].tags};"
+
+
         if projects[assignment.assignable_id].name
-          project = Project.find_or_create_by!(
-            name: projects[assignment.assignable_id].name,
-            starts_at: projects[assignment.assignable_id].starts_at,
-            ends_at: projects[assignment.assignable_id].ends_at,
-            client: projects[assignment.assignable_id].client,
-            phase_name: projects[assignment.assignable_id].phase_name,
-            archived: projects[assignment.assignable_id].archived
-            )
-          team_member.project = project
-          team_member.save!
+          unless projects[assignment.assignable_id].tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
+            project = Project.find_or_create_by!(
+              name: projects[assignment.assignable_id].name,
+              starts_at: projects[assignment.assignable_id].starts_at,
+              ends_at: projects[assignment.assignable_id].ends_at,
+              client: projects[assignment.assignable_id].client,
+              phase_name: projects[assignment.assignable_id].phase_name,
+              archived: projects[assignment.assignable_id].archived
+              )
+            team_member.project = project
+            team_member.save!
+          end
         end
       end
     end
