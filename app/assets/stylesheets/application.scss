@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+
+body {
+  background-color: #02153B;
+  font-family: "Open Sans", "Helvetica", "sans-serif";
+  color: #FAF6F5;
+}
+
+h1 {
+  color: #FEFBFB;
+}
+
+h2 {
+  font-family: "Alata", "Helvetica", "sans-serif";
+  color: #D8D7D8;
+}
+
+.card {
+  background-color: #00567E;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.30);
+}
