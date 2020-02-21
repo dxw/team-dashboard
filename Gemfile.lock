@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:dxw/tenk
+  remote: https://github.com/dxw/tenk
   revision: 823497ffc755c082e935311875e763bd6d2b475f
   specs:
     tenk (0.0.5)
