@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_19_152902) do
+ActiveRecord::Schema.define(version: 2020_02_25_170408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_02_19_152902) do
     t.uuid "project_id"
     t.string "name"
     t.integer "tenk_id", null: false
-    t.string "role"
+    t.string "discipline"
     t.string "thumbnail"
     t.boolean "billable"
     t.index ["project_id"], name: "index_team_members_on_project_id"
