@@ -19,6 +19,7 @@ body {
   background-color: #02153B;
   font-family: "Open Sans", "Helvetica", "sans-serif";
   color: #FAF6F5;
+  padding: 20px;
 }
 
 h1 {
@@ -30,7 +31,32 @@ h2 {
   color: #D8D7D8;
 }
 
+.row {
+  align-items: stretch;
+  justify-content: space-evenly;
+}
+
 .card {
   background-color: #00567E;
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.30);
+  margin: 10px;
+}
+
+.members {
+  display: flex;
+}
+
+.member {
+  margin: 10px;
+  font-size: 14px;
+}
+
+.unstyled-list {
+  list-style: none;
+  padding: 0;
+}
+
+.member img {
+   width: 50px;
+   border-radius: 50%;
 }
