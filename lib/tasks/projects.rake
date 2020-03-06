@@ -19,7 +19,7 @@ namespace :projects do
       team_member = TeamMember.find_or_create_by!(
         name: user.display_name,
         tenk_id: user.id,
-        role: user.discipline,
+        discipline: user.discipline,
         thumbnail: user.thumbnail,
         billable: user.billable
       )
