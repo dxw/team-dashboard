@@ -15,14 +15,16 @@ namespace :projects do
     users = tenk.users.list(per_page: 100).data
 
     users.each do |user|
-      puts user.display_name
-      team_member = TeamMember.find_or_create_by!(
-        name: user.display_name,
-        tenk_id: user.id,
+      puts user
+      team_member = TeamMember.find_or_initialize_by(tenk_id: user.id)
+
+      team_member.attributes = {
+        first_name: user.first_name,
+        last_name: user.last_name,
         discipline: user.discipline,
         thumbnail: user.thumbnail,
         billable: user.billable
-      )
+      }
 
       assignments = tenk.users.assignments.list(
         user.id,
@@ -45,10 +47,13 @@ namespace :projects do
               archived: projects[assignment.assignable_id].archived
               )
             team_member.project = project
-            team_member.save!
+
           end
         end
       end
+
+      team_member.save!
+
     end
   end
 end

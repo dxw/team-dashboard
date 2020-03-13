@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_25_170408) do
+ActiveRecord::Schema.define(version: 2020_03_13_112822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -30,11 +30,12 @@ ActiveRecord::Schema.define(version: 2020_02_25_170408) do
 
   create_table "team_members", force: :cascade do |t|
     t.uuid "project_id"
-    t.string "name"
     t.integer "tenk_id", null: false
     t.string "discipline"
     t.string "thumbnail"
     t.boolean "billable"
+    t.string "first_name"
+    t.string "last_name"
     t.index ["project_id"], name: "index_team_members_on_project_id"
   end
 
