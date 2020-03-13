@@ -33,19 +33,27 @@ namespace :projects do
       ).data
 
       assignments.each do |assignment|
+
+        assignable_project = projects[assignment.assignable_id]
         puts " #{projects[assignment.assignable_id].tags};"
 
+        puts assignment.assignable_id
+        puts assignable_project
 
-        if projects[assignment.assignable_id].name
-          unless projects[assignment.assignable_id].tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
-            project = Project.find_or_create_by!(
-              name: projects[assignment.assignable_id].name,
-              starts_at: projects[assignment.assignable_id].starts_at,
-              ends_at: projects[assignment.assignable_id].ends_at,
-              client: projects[assignment.assignable_id].client,
-              phase_name: projects[assignment.assignable_id].phase_name,
-              archived: projects[assignment.assignable_id].archived
-              )
+        if assignable_project.name
+          unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
+            project = Project.find_or_initialize_by(tenk_id: assignable_project.id)
+
+            project.attributes = {
+              name: assignable_project.name,
+              starts_at: assignable_project.starts_at,
+              ends_at: assignable_project.ends_at,
+              client: assignable_project.client,
+              phase_name: assignable_project.phase_name,
+              archived: assignable_project.archived
+            }
+            project.save!
+
             team_member.project = project
 
           end

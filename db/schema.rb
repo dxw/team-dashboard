@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_112822) do
+ActiveRecord::Schema.define(version: 2020_03_13_120925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_03_13_112822) do
     t.string "client"
     t.string "phase_name"
     t.boolean "archived"
+    t.integer "tenk_id", null: false
   end
 
   create_table "team_members", force: :cascade do |t|
