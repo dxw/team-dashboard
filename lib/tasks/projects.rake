@@ -19,7 +19,8 @@ namespace :projects do
       team_member = TeamMember.find_or_initialize_by(tenk_id: user.id)
 
       team_member.attributes = {
-        name: user.display_name,
+        first_name: user.first_name,
+        last_name: user.last_name,
         discipline: user.discipline,
         thumbnail: user.thumbnail,
         billable: user.billable
@@ -46,10 +47,13 @@ namespace :projects do
               archived: projects[assignment.assignable_id].archived
               )
             team_member.project = project
-            team_member.save!
+
           end
         end
       end
+
+      team_member.save!
+
     end
   end
 end
