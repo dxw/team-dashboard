@@ -1,23 +1,23 @@
-<div class="row">
+<div class="projects">
   <% @projects.each do |project| %>
     <% if project.team_members.count > 0 %>
-      <div class="card card-radius" >
-        <div class="card-body">
-          <h3><%= project.name %></h3>
-            <div class="members">
-            <% project.team_members.each do |team_member| %>
-              <ul class="member unstyled-list">
-                <li><% if team_member.thumbnail.present? %>
-                  <%= image_tag team_member.thumbnail %>
-                <% else %>
-                  <%= image_tag("anon.png")  %>
-                <% end %></li>
-                <li><%= team_member.name %></li>
-                <li><%= team_member.discipline %></li>
-              </ul>
-            <% end %>
-          </div>
-        </div>
+      <div class="project" >
+        <h2><%= project.name %></h2>
+        <ul class="members">
+          <% project.team_members.each do |team_member| %>
+            <li class="member">
+              <% if team_member.thumbnail.present? %>
+                <%= image_tag team_member.thumbnail %>
+              <% else %>
+                <%= image_tag("anon.png")  %>
+              <% end %>
+              <dl>
+                <dt><%= team_member.name %></dt>
+                <dd><%= team_member.discipline %></dd>
+              </dl>
+            </li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
   <% end %>

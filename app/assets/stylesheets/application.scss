@@ -1,62 +1,200 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-@import "bootstrap";
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Cardo:400,400i&display=swap");
+@import "normalize";
 
-body {
-  background-color: #02153B;
-  font-family: "Open Sans", "Helvetica", "sans-serif";
-  color: #FAF6F5;
-  padding: 20px;
+@function escape-hexcode($colour) {
+  @return "%23" + str-slice("" + $colour, 2);
 }
 
-h1 {
-  color: #FEFBFB;
+@function dmark-svg($colour) {
+  $url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 73.5 88.2' class='pre-footer__logo'><path fill='#{escape-hexcode($colour)}' d='M29.5 0H0v88.3h29.5c24.4 0 44.2-19.8 44.2-44.2S53.8 0 29.5 0z'/></svg>";
+
+  @return url("#{$url}");
+}
+
+@mixin dmark-icon($inner-colour, $outer-colour) {
+  background: $outer-colour dmark-svg($inner-colour) center center / 50%
+    no-repeat;
+}
+
+$navy-dark: #17212c;
+$navy: #243746;
+$cream: #f3f1e9;
+$ivory: #f9f8f5;
+
+$grey: #bdbdbd;
+$grey-light: #efefec;
+
+$yellow: #ff9e18;
+$yellow-mid: #ffb259;
+$yellow-light: #fcd672;
+$orange: #ff5c35;
+$orange-mid: #ff8d6b;
+$orange-light: #ffa489;
+$red: #ff595a;
+$red-mid: #ff8189;
+$red-light: #ffb1b9;
+$purple: #69488e;
+$purple-mid: #7473c0;
+$purple-light: #a7a4df;
+$teal: #09615d;
+$teal-mid: #009490;
+$teal-light: #80c7bc;
+$blue: #004876;
+$blue-mid: #009abf;
+$blue-light: #73c3d5;
+
+$dark-colours: (
+  $navy-dark $navy $purple $purple-mid $teal $teal-mid $blue $blue-mid
+);
+
+$font-family-serif: "Cardo", -apple-system, serif;
+$font-family-sans-serif: "Poppins", sans-serif;
+
+$system-font-family-serif: $font-family-serif;
+
+$base-font: $font-family-serif;
+$base-line-height: 1.5;
+
+$heading-font-family: $font-family-sans-serif;
+$heading-line-height: 1.35;
+
+// Base site
+$base-font-colour: $navy;
+$body-background-colour: $ivory;
+
+// Links
+$link-colour: $navy;
+$link-colour-light: $ivory;
+
+
+body {
+  background-color: $body-background-colour;
+  font-family: $base-font;
+  color: $base-font-colour;
 }
 
 h2 {
-  font-family: "Alata", "Helvetica", "sans-serif";
-  color: #D8D7D8;
+  font-family: $heading-font-family;
+  color: $ivory;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.3;
+  background-repeat: no-repeat;
+  padding: 20px 20px 20px 60px ;
+  background-position: 22px 25px;
+  background-size: auto 20px;
+  margin: 0;
 }
 
-.row {
-  align-items: stretch;
-  justify-content: space-evenly;
-}
+.project {
 
-.card {
-  background-color: #00567E;
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.30);
-  margin: 10px;
-}
+  &:nth-of-type(8n+1) {
+    h2 {
+      background-color: $teal-mid;
+      background-image: dmark-svg($yellow-light);
+    }
+  }
 
-.members {
-  display: flex;
-}
+  &:nth-of-type(8n+2) {
+    h2 {
+      background-color: $blue-light;
+      background-image: dmark-svg($red-mid);
+    }
+  }
 
-.member {
-  margin: 10px;
-  font-size: 14px;
-}
+  &:nth-of-type(8n+3) {
+    h2 {
+      background-color: $orange-mid;
+      background-image: dmark-svg($teal-mid);
+    }
+  }
 
-.unstyled-list {
-  list-style: none;
-  padding: 0;
-}
+  &:nth-of-type(8n+4) {
+    h2 {
+      background-color: $red;
+      background-image: dmark-svg($orange-light);
+    }
+  }
 
-.member img {
-   width: 50px;
-   border-radius: 50%;
+  &:nth-of-type(8n+5) {
+    h2 {
+      background-color: $teal-mid;
+      background-image: dmark-svg($blue-light);
+    }
+  }
+
+  &:nth-of-type(8n+6) {
+    h2 {
+      background-color: $red;
+      background-image: dmark-svg($yellow-mid);
+    }
+  }
+
+  &:nth-of-type(8n+7) {
+    h2 {
+      background-color: $teal;
+      background-image: dmark-svg($teal-light);
+    }
+  }
+
+  &:nth-of-type(8n+8) {
+    h2 {
+      background-color: $purple;
+      background-image: dmark-svg($purple-light);
+    }
+  }
+
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: 3fr 7fr;
+  margin: 40px 20px 40px 40px;
+  padding-top: 40px;
+  border-top: 1px solid $grey;
+
+  &:first-child {
+    border: none;
+    padding: 0;
+  }
+
+  h2 {
+    grid-column: span 1;
+  }
+  ul.members {
+    display: grid;
+    grid-gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+
+    li.member {
+      grid-column: span 1;
+
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      align-items: center;
+
+      margin: 0;
+      padding: 0;
+
+      list-style: none;
+
+      dl {
+        padding: 10px;
+        dt {
+          font-family: $font-family-sans-serif;
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+        dd {
+          margin-left: 0;
+        }
+      }
+
+      img {
+        width: 100%;
+        border: 1px solid $grey-light;
+      }
+    }
+  }
 }
