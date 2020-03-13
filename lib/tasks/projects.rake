@@ -15,14 +15,15 @@ namespace :projects do
     users = tenk.users.list(per_page: 100).data
 
     users.each do |user|
-      puts user.display_name
-      team_member = TeamMember.find_or_create_by!(
+      puts user
+      team_member = TeamMember.find_or_initialize_by(tenk_id: user.id)
+
+      team_member.attributes = {
         name: user.display_name,
-        tenk_id: user.id,
         discipline: user.discipline,
         thumbnail: user.thumbnail,
         billable: user.billable
-      )
+      }
 
       assignments = tenk.users.assignments.list(
         user.id,
