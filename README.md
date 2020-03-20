@@ -1,24 +1,46 @@
-# README
+# Team Dashboard
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A rails application which pulls the projects people are working on from 10,000ft
+and displays them on a nice screen.
 
-Things you may want to cover:
+## Starting Developing
 
-* Ruby version
+### Environment variables
 
-* System dependencies
+Copy the`.env.example` file to `.env` and fill in the `TENK_USER_ID` and
+`TENK_PASSWORD` credentials. You can find these in 1Password for the
+`utilisation.dashboard@dxw.com` user.
 
-* Configuration
+### Prerequisites
 
-* Database creation
+To install prerequisites run `bundle install`
 
-* Database initialization
+#### Github Personal Access Token
 
-* How to run the test suite
+When you run `bundle install` for the first time you may be prompted for a
+Github username and password.
 
-* Services (job queues, cache servers, search engines, etc.)
+Use your own username, and use a [Personal Access
+Token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
+instead of your password.
 
-* Deployment instructions
+### Database migrations
 
-* ...
+If this if your first time setting up the application, run `bin/rake db:setup`.
+
+To bring your database up to the latest version if you already have one set up
+run `bin/rake db:migrate`.
+
+## Downloading the latest data
+
+Once you've set up your `.env` file and run the necessary database migrations,
+you can download the latest data with `bin/rake projects:fetch`.
+
+All data within the database is recreated from 10,000ft as necessary. You can
+return to an empty database if necessary with `bin/rake db:reset` and then
+re-import the data.
+
+## Running the server
+
+Run `bin/rails s` and the server should be accessible at
+`http://localhost:3000`.
