@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature "Users can see a list of projects", type: "feature" do
+  before do
+    page.driver.browser.basic_authorize(ENV.fetch('HTTP_BASIC_USER'), ENV.fetch('HTTP_BASIC_PASSWORD'))
+  end
 
   context "when a single project exist" do
     it "will show a list of projects on the main page" do
