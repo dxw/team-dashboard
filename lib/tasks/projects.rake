@@ -54,8 +54,7 @@ namespace :projects do
             }
             project.save!
 
-            team_member.project = project
-
+            team_member.projects << project unless team_member.projects.include?(project)
           end
         end
       end
