@@ -26,6 +26,9 @@ jobs:
         with:
           ruby-version: "2.6.5"
       - name: Install dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.DXW_TOKEN }}
+          BUNDLE_GITHUB__COM: ${{ secrets.DXW_TOKEN }}:x-oauth-basic
         run: |
           sudo apt-get install libpq-dev
           gem install bundler
