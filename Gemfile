@@ -58,4 +58,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'tenk', git: 'https://github.com/dxw/tenk'
-gem 'dotenv'
+gem 'dotenv-rails'
