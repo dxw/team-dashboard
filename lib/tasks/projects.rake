@@ -15,7 +15,7 @@ namespace :projects do
     users = tenk.users.list(per_page: 100).data
 
     users.each do |user|
-      puts user
+      puts user.display_name
       team_member = TeamMember.find_or_initialize_by(tenk_id: user.id)
 
       team_member.attributes = {
@@ -33,16 +33,14 @@ namespace :projects do
       ).data
 
       assignments.each do |assignment|
+        puts "Assignable id: #{assignment.assignable_id}"
 
         assignable_project = projects[assignment.assignable_id]
-        puts " #{projects[assignment.assignable_id].tags};"
-
-        puts assignment.assignable_id
-        puts assignable_project
         while assignable_project.parent_id
           puts "#{assignable_project.name} (#{assignable_project.id}), phase of #{assignable_project.parent_id}"
           assignable_project = projects[assignable_project.parent_id]
         end
+        puts "#{projects[assignable_project.id].tags&.data&.map(&:value)};"
 
         if assignable_project.name
           unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
