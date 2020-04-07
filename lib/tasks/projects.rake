@@ -39,6 +39,10 @@ namespace :projects do
 
         puts assignment.assignable_id
         puts assignable_project
+        while assignable_project.parent_id
+          puts "#{assignable_project.name} (#{assignable_project.id}), phase of #{assignable_project.parent_id}"
+          assignable_project = projects[assignable_project.parent_id]
+        end
 
         if assignable_project.name
           unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
