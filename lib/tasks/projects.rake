@@ -53,7 +53,6 @@ namespace :projects do
               starts_at: assignable_project.starts_at,
               ends_at: assignable_project.ends_at,
               client: assignable_project.client,
-              phase_name: assignable_project.phase_name,
               archived: assignable_project.archived
             }
             project.save!
