@@ -5,7 +5,7 @@ RSpec.describe TeamMember, type: :model do
   describe "validations" do
     it { should validate_presence_of(:first_name) }
     it { should validate_uniqueness_of(:tenk_id) }
-    it { should belong_to(:project) }
+    it { should have_many(:projects) }
   end
 
   describe "#name" do
