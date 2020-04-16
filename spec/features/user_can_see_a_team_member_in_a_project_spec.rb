@@ -8,10 +8,11 @@ RSpec.feature 'user can see team members within a project', type: 'feature' do
   context "when the team member is assigned to only one project" do
     scenario 'they can see one team member within a given project' do
       dashboard = Project.create(name: 'Dashboard', tenk_id: 1234)
-      member = TeamMember.create(first_name: 'Joe', last_name: "Smith", projects: [dashboard], tenk_id: 1234)
+      member = TeamMember.create(first_name: 'Joe', last_name: "Smith", projects: [dashboard], discipline: "Development", tenk_id: 1234)
 
       visit '/'
       expect(page).to have_content(member.name)
+      expect(page).to have_content(member.job_title)
     end
   end
 
