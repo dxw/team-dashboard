@@ -7,9 +7,13 @@ default: &default
 
 development:
   <<: *default
+  database: team_dashboard_development
+
 
 test:
   <<: *default
+  database: team_dashboard_test
+
 
 production:
   <<: *default
