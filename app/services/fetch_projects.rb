@@ -1,8 +1,6 @@
 class FetchProjects
   def call
 
-    users = tenk.users.list(per_page: 100).data
-
     projects = Hash.new { |hash, project_id|
       hash[project_id] = tenk.projects.get(project_id)
     }
@@ -62,5 +60,9 @@ class FetchProjects
       user_id: ENV.fetch('TENK_USER_ID'),
       password: ENV.fetch('TENK_PASSWORD'),
     )
+  end
+
+  private def users
+    tenk.users.list(per_page: 100).data
   end
 end
