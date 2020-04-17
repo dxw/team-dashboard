@@ -1,10 +1,5 @@
 class FetchProjects
   def call
-
-    projects = Hash.new { |hash, project_id|
-      hash[project_id] = tenk.projects.get(project_id)
-    }
-
     users.each do |user|
       puts user.display_name
       team_member = TeamMember.find_or_initialize_by(tenk_id: user.id)
@@ -64,5 +59,11 @@ class FetchProjects
 
   private def users
     tenk.users.list(per_page: 100).data
+  end
+
+  private def projects
+    Hash.new { |hash, project_id|
+      hash[project_id] = tenk.projects.get(project_id)
+    }
   end
 end
