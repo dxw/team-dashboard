@@ -1,9 +1,5 @@
 class FetchProjects
   def call
-    tenk = Tenk.new(
-      user_id: ENV.fetch('TENK_USER_ID'),
-      password: ENV.fetch('TENK_PASSWORD'),
-    )
 
     users = tenk.users.list(per_page: 100).data
 
@@ -60,5 +56,11 @@ class FetchProjects
 
       team_member.save!
     end
+  end
+  private def tenk
+    @tenk = Tenk.new(
+      user_id: ENV.fetch('TENK_USER_ID'),
+      password: ENV.fetch('TENK_PASSWORD'),
+    )
   end
 end
