@@ -7,37 +7,13 @@ class FetchProjects
       assignments = get_user_assignment(user)
 
       assignments.each do |assignment|
-        puts "Assignable id: #{assignment.assignable_id}"
-
-        assignable_project = projects[assignment.assignable_id]
-        while assignable_project.parent_id
-          puts "#{assignable_project.name} (#{assignable_project.id}), phase of #{assignable_project.parent_id}"
-          assignable_project = projects[assignable_project.parent_id]
-        end
-
-        puts "#{projects[assignable_project.id].tags&.data&.map(&:value)};"
-
-        if assignable_project.name
-          unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
-            project = Project.find_or_initialize_by(tenk_id: assignable_project.id)
-
-            project.attributes = {
-              name: assignable_project.name,
-              starts_at: assignable_project.starts_at,
-              ends_at: assignable_project.ends_at,
-              client: assignable_project.client,
-              archived: assignable_project.archived
-            }
-            project.save!
-
-            team_member.projects << project unless team_member.projects.include?(project)
-          end
-        end
+        create_projects(assignment, team_member)
       end
 
       team_member.save!
     end
   end
+
   private def tenk
     @tenk = Tenk.new(
       user_id: ENV.fetch('TENK_USER_ID'),
@@ -65,6 +41,35 @@ class FetchProjects
       billable: user.billable
     }
     team_member
+  end
+
+  private def create_projects(assignment, team_member)
+    puts "Assignable id: #{assignment.assignable_id}"
+
+    assignable_project = projects[assignment.assignable_id]
+    while assignable_project.parent_id
+      puts "#{assignable_project.name} (#{assignable_project.id}), phase of #{assignable_project.parent_id}"
+      assignable_project = projects[assignable_project.parent_id]
+    end
+
+    puts "#{projects[assignable_project.id].tags&.data&.map(&:value)};"
+
+    if assignable_project.name
+      unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
+        project = Project.find_or_initialize_by(tenk_id: assignable_project.id)
+
+        project.attributes = {
+          name: assignable_project.name,
+          starts_at: assignable_project.starts_at,
+          ends_at: assignable_project.ends_at,
+          client: assignable_project.client,
+          archived: assignable_project.archived
+        }
+        project.save!
+
+        team_member.projects << project unless team_member.projects.include?(project)
+      end
+    end
   end
 
   private def get_user_assignment(user)
