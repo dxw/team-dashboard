@@ -4,12 +4,7 @@ class FetchProjects
       puts user.display_name
       team_member = create_team_member(user)
 
-
-      assignments = tenk.users.assignments.list(
-        user.id,
-        from: Date.yesterday,
-        to: Date.tomorrow,
-      ).data
+      assignments = get_user_assignment(user)
 
       assignments.each do |assignment|
         puts "Assignable id: #{assignment.assignable_id}"
@@ -70,5 +65,13 @@ class FetchProjects
       billable: user.billable
     }
     team_member
+  end
+
+  private def get_user_assignment(user)
+    assignments = tenk.users.assignments.list(
+      user.id,
+      from: Date.yesterday,
+      to: Date.tomorrow,
+    ).data
   end
 end
