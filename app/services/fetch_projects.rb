@@ -2,15 +2,8 @@ class FetchProjects
   def call
     users.each do |user|
       puts user.display_name
-      team_member = TeamMember.find_or_initialize_by(tenk_id: user.id)
+      team_member = create_team_member(user)
 
-      team_member.attributes = {
-        first_name: user.first_name,
-        last_name: user.last_name,
-        discipline: user.discipline,
-        thumbnail: user.thumbnail,
-        billable: user.billable
-      }
 
       assignments = tenk.users.assignments.list(
         user.id,
@@ -65,5 +58,17 @@ class FetchProjects
     Hash.new { |hash, project_id|
       hash[project_id] = tenk.projects.get(project_id)
     }
+  end
+
+  private def create_team_member(user)
+    team_member = TeamMember.find_or_initialize_by(tenk_id: user.id)
+    team_member.attributes = {
+      first_name: user.first_name,
+      last_name: user.last_name,
+      discipline: user.discipline,
+      thumbnail: user.thumbnail,
+      billable: user.billable
+    }
+    team_member
   end
 end
