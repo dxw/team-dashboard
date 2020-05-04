@@ -61,4 +61,30 @@ RSpec.describe TeamMember, type: :model do
       expect(team_member_one.job_title).to eq "foo"
     end
   end
+
+  describe "#delivery_first" do
+    it "returns 0 for people in the Delivery discipline" do
+      subject.discipline = "Delivery"
+
+      expect(subject.delivery_first).to eq(0)
+    end
+
+    it "returns 1 for people in any other discipline" do
+      expect(subject.delivery_first).to eq(1)
+    end
+  end
+
+  describe ".delivery_first" do
+    it "sorts people in the Delivery discipline first, then everyone by name, case-insensitive" do
+      delivery_lead2 = TeamMember.new(discipline: "Delivery", first_name: "Zaphod")
+      delivery_lead1 = TeamMember.new(discipline: "Delivery", first_name: "Xander")
+      xw = TeamMember.new(first_name: "Xena", last_name: "Warrior")
+      xp = TeamMember.new(first_name: "Xena", last_name: "Princess")
+      a = TeamMember.new(discipline: "Aarghing", first_name: "aardvark")
+      team_members = [xw, a, xp, delivery_lead1, delivery_lead2]
+      delivery_first = [delivery_lead1, delivery_lead2, a, xp, xw]
+
+      expect(TeamMember.delivery_first(team_members)).to eq(delivery_first)
+    end
+  end
 end
