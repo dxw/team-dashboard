@@ -18,7 +18,17 @@ class TeamMember < ApplicationRecord
   }.freeze
 
   def name
-    first_name
+    return first_name if last_name.blank? || first_name_unique?
+
+    disambiguated_name
+  end
+
+  def first_name_unique?
+    TeamMember.where(first_name: first_name).count == 1
+  end
+
+  def disambiguated_name
+    "#{first_name} #{last_name[0]}".strip
   end
 
   def job_title

@@ -11,8 +11,24 @@ RSpec.describe TeamMember, type: :model do
   end
 
   describe "#name" do
-    it "returns the first name of the person" do
+    it "returns the first name of the person if their first name is unique within the existing team" do
       expect(subject.name).to eq "Joe"
+    end
+
+    context "for a person whose first name is not unique within the existing team" do
+      before do
+        TeamMember.create(first_name: "Joe", last_name: "Adamson", tenk_id: 1235)
+      end
+
+      it "returns the first name and the initial of the last name if they have one" do
+        expect(subject.name).to eq "Joe S"
+      end
+
+      it "returns the first name of the person if that is their full name" do
+        subject.last_name = ""
+
+        expect(subject.name).to eq "Joe"
+      end
     end
   end
 
@@ -45,5 +61,4 @@ RSpec.describe TeamMember, type: :model do
       expect(team_member_one.job_title).to eq "foo"
     end
   end
-
 end
