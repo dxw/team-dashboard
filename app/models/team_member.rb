@@ -38,4 +38,12 @@ class TeamMember < ApplicationRecord
       discipline
     end
   end
+
+  def delivery_first
+    discipline == "Delivery" ? 0 : 1
+  end
+
+  def self.delivery_first(team_members)
+    team_members.sort_by { |tm| [ tm.delivery_first, tm.name.downcase ] }
+  end
 end
