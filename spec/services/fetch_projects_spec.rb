@@ -2,28 +2,14 @@ require "rails_helper"
 
 RSpec.describe FetchProjects do
   describe "#call" do
+
+    before {
+      fetch_projects_from_tenk_set_up
+      fetch_team_members_from_tenk_set_up
+      fetch_assignments_from_tenk_set_up
+    }
+
     it "imports team members and projects from tenk feet" do
-      fake_tenk_client = double(Tenk::Client)
-      allow(Tenk).to receive(:new).and_return(fake_tenk_client)
-
-      # Stub the fetching of projects from tenk
-      fake_tenk_projects_object = double(Tenk::Projects)
-      allow(fake_tenk_client).to receive(:projects).and_return(fake_tenk_projects_object)
-      allow(fake_tenk_projects_object).to receive(:get)
-        .with(123)
-        .and_return(fake_tenk_project)
-
-      # Stub the fetching of team members from tenk
-      fake_tenk_users_object = double(Tenk::Client)
-      allow(fake_tenk_client).to receive(:users).and_return(fake_tenk_users_object)
-      allow(fake_tenk_users_object).to receive_message_chain(:list, :data)
-        .and_return(fake_team_member_response)
-
-      # Stub the fetching of assignments from tenk
-      allow(fake_tenk_client).to receive(:users).and_return(fake_tenk_users_object)
-      allow(fake_tenk_users_object).to receive_message_chain(:assignments, :list, :data)
-        .and_return(fake_tenk_assignment_response)
-
       result = described_class.new.call
 
       # Some team members get created
@@ -48,6 +34,43 @@ RSpec.describe FetchProjects do
       # Team members and projects are linked together
       expect(team_member.projects).to include(project)
     end
+  end
+
+  def fake_tenk_client
+    @fake_tenk_client ||= begin
+      fake_tenk_client = double(Tenk::Client)
+      allow(Tenk).to receive(:new).and_return(fake_tenk_client)
+      fake_tenk_client
+    end
+  end
+
+  def fake_tenk_users_object
+    @fake_tenk_client ||= begin
+      double(Tenk::Client)
+    end
+  end
+
+  def fetch_projects_from_tenk_set_up
+    # Stub the fetching of projects from tenk
+    fake_tenk_projects_object = double(Tenk::Projects)
+    allow(fake_tenk_client).to receive(:projects).and_return(fake_tenk_projects_object)
+    allow(fake_tenk_projects_object).to receive(:get)
+      .with(123)
+      .and_return(fake_tenk_project)
+    end
+
+  def fetch_team_members_from_tenk_set_up
+    # Stub the fetching of team members from tenk
+    allow(fake_tenk_client).to receive(:users).and_return(fake_tenk_users_object)
+    allow(fake_tenk_users_object).to receive_message_chain(:list, :data)
+      .and_return(fake_team_member_response)
+  end
+
+  def fetch_assignments_from_tenk_set_up
+    # Stub the fetching of assignments from tenk
+    allow(fake_tenk_client).to receive(:users).and_return(fake_tenk_users_object)
+    allow(fake_tenk_users_object).to receive_message_chain(:assignments, :list, :data)
+      .and_return(fake_tenk_assignment_response)
   end
 
   private def fake_tenk_project
