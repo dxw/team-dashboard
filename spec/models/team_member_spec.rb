@@ -43,6 +43,8 @@ RSpec.describe TeamMember, type: :model do
       team_member_seven = TeamMember.new(discipline: "Strategy")
       team_member_eight = TeamMember.new(discipline: "Technical Architecture")
       team_member_nine = TeamMember.new(discipline: "Product")
+      team_member_ten = TeamMember.new(discipline: "Content")
+      team_member_eleven = TeamMember.new(discipline: "Hackers")
 
       expect(team_member_one.job_title).to eq "Developer"
       expect(team_member_two.job_title).to eq "Delivery Lead"
@@ -53,6 +55,8 @@ RSpec.describe TeamMember, type: :model do
       expect(team_member_seven.job_title).to eq "Strategist"
       expect(team_member_eight.job_title).to eq "Technical Architect"
       expect(team_member_nine.job_title).to eq "Product Manager"
+      expect(team_member_ten.job_title).to eq "Creative Writer"
+      expect(team_member_eleven.job_title).to eq "Ethical Hacker"
     end
 
     it "returns 10k ft discipline when theres an unexpected discipline" do

@@ -14,7 +14,9 @@ class TeamMember < ApplicationRecord
     "Operations Engineering" => "Operations Engineer",
     "Strategy" => "Strategist",
     "Technical Architecture" => "Technical Architect",
-    "Product" => "Product Manager"
+    "Product" => "Product Manager",
+    "Content" => "Creative Writer",
+    "Hackers" => "Ethical Hacker",
   }.freeze
 
   def name
