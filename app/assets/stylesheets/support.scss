@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Cardo:700|Poppins:600,800&display=swap');
+@import "dxw-branding";
+
+body {
+  color: $navy;
+  background-color: $ivory;
+  font-family: $base-font;
+}
+
+h1, table tr th {
+  font-family: $heading-font-family;
+  font-weight: 600;
+}
+
+table {
+  border: 1px solid $navy;
+  border-spacing: 0;
+}
+
+table tr th, table tr td {
+  padding: 10px 10px;
+  border-bottom: 1px solid $navy;
+  border-left: 1px solid $navy;
+}
+
+table tr th {
+  background-color: $yellow-light;
+}
+
+.current {
+  font-weight: bold;
+  background-color: $yellow-light;
+}
+
+.last-month {
+  background-color: $cream;
+}
+
+.historical {
+  background-color: $ivory;
+}
+
+.regular {
+  background-color: $ivory;
+}
+
+.warning {
+  background-color: $red-light;
+}
