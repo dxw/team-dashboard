@@ -1,0 +1,16 @@
+{
+  "data": {
+      "id": "e71d500f-896a-4b28-8b08-3bfe56e1ed76",
+      "name": "first_line",
+      "description": "",
+      "timezone": "Europe/London",
+      "enabled": true,
+      "ownerTeam": {
+          "id": "72c99d92-c7c8-4fd9-b8db-9cc293cd19e7",
+          "name": "support_team"
+      },
+      "rotations": []
+  },
+  "took": 0.145,
+  "requestId": "832f256f-4078-4583-9fca-b3919282ba41"
+}

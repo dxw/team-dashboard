@@ -1,0 +1,315 @@
+{
+  "data": {
+      "_parent": {
+          "id": "e71d500f-896a-4b28-8b08-3bfe56e1ed76",
+          "name": "first_line",
+          "enabled": true
+      },
+      "startDate": "2020-02-01T00:00:00Z",
+      "endDate": "2020-03-01T00:00:00Z",
+      "finalTimeline": {
+          "rotations": [
+              {
+                  "id": "69e7d46d-538e-4fca-95d0-5c316a54424e",
+                  "name": "On Call Phone",
+                  "order": 2.0,
+                  "periods": [
+                      {
+                          "startDate": "2020-02-01T00:00:00Z",
+                          "endDate": "2020-02-25T10:14:22.766Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "19e39115-07d5-4924-8295-332a66dd1569",
+                              "type": "user",
+                              "name": "systems@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "19e39115-07d5-4924-8295-332a66dd1569",
+                                  "type": "user",
+                                  "name": "systems@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-25T10:14:22.766Z",
+                          "endDate": "2020-03-01T00:00:00Z",
+                          "type": "default",
+                          "recipient": {
+                              "id": "19e39115-07d5-4924-8295-332a66dd1569",
+                              "type": "user",
+                              "name": "systems@example.com"
+                          }
+                      }
+                  ]
+              },
+              {
+                  "id": "b073c102-ecd5-4a6f-acf2-443280074c33",
+                  "name": "Ops",
+                  "order": 3.0,
+                  "periods": [
+                      {
+                            "startDate": "2020-01-01T10:00:00Z",
+                            "endDate": "2020-01-01T18:00:00Z",
+                            "type": "historical",
+                            "recipient": {
+                                "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                                "type": "user",
+                                "name": "bob@example.com"
+                            },
+                            "flattenedRecipients": [
+                                {
+                                    "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                                    "type": "user",
+                                    "name": "bob@example.com"
+                                }
+                            ]
+                      },
+                      {
+                          "startDate": "2020-02-05T10:00:00Z",
+                          "endDate": "2020-02-05T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                              "type": "user",
+                              "name": "bob@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                                  "type": "user",
+                                  "name": "bob@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-06T10:00:00Z",
+                          "endDate": "2020-02-06T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                              "type": "user",
+                              "name": "bob@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                                  "type": "user",
+                                  "name": "bob@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-07T10:00:00Z",
+                          "endDate": "2020-02-07T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                              "type": "user",
+                              "name": "bob@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                                  "type": "user",
+                                  "name": "bob@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-10T10:00:00Z",
+                          "endDate": "2020-02-10T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                              "type": "user",
+                              "name": "bob@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                                  "type": "user",
+                                  "name": "bob@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-11T10:00:00Z",
+                          "endDate": "2020-02-11T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                              "type": "user",
+                              "name": "bob@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "b5b92115-bfe7-43eb-8c2a-e467f2e5ddc4",
+                                  "type": "user",
+                                  "name": "bob@example.com"
+                              }
+                          ]
+                      }
+                  ]
+              },
+              {
+                  "id": "3d9295c6-748d-4bd4-a153-8fd559be0722",
+                  "name": "Dev",
+                  "order": 4.0,
+                  "periods": [
+                      {
+                          "startDate": "2020-02-05T10:00:00Z",
+                          "endDate": "2020-02-05T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                              "type": "user",
+                              "name": "alice@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                                  "type": "user",
+                                  "name": "alice@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-06T10:00:00Z",
+                          "endDate": "2020-02-06T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                              "type": "user",
+                              "name": "alice@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                                  "type": "user",
+                                  "name": "alice@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-07T10:00:00Z",
+                          "endDate": "2020-02-07T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                              "type": "user",
+                              "name": "alice@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                                  "type": "user",
+                                  "name": "alice@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-10T10:00:00Z",
+                          "endDate": "2020-02-10T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                              "type": "user",
+                              "name": "alice@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                                  "type": "user",
+                                  "name": "alice@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-11T10:00:00Z",
+                          "endDate": "2020-02-11T18:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                              "type": "user",
+                              "name": "alice@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "e07c63f0-dd8c-4ad4-983e-4ee7dc600463",
+                                  "type": "user",
+                                  "name": "alice@example.com"
+                              }
+                          ]
+                      }
+                  ]
+              },
+              {
+                  "id": "538465d7-67d0-4d3d-80e0-e2a07a2b5649",
+                  "name": "OOH",
+                  "order": 5.0,
+                  "periods": [
+                      {
+                          "startDate": "2020-02-01T00:00:00Z",
+                          "endDate": "2020-02-03T10:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "acd9af98-e3c0-4588-8276-1c545911e44f",
+                              "type": "user",
+                              "name": "bob@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "acd9af98-e3c0-4588-8276-1c545911e44f",
+                                  "type": "user",
+                                  "name": "bob@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-03T18:00:00Z",
+                          "endDate": "2020-02-04T10:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "acd9af98-e3c0-4588-8276-1c545911e44f",
+                              "type": "user",
+                              "name": "bob@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "acd9af98-e3c0-4588-8276-1c545911e44f",
+                                  "type": "user",
+                                  "name": "bob@example.com"
+                              }
+                          ]
+                      },
+                      {
+                          "startDate": "2020-02-04T18:00:00Z",
+                          "endDate": "2020-02-05T10:00:00Z",
+                          "type": "historical",
+                          "recipient": {
+                              "id": "acd9af98-e3c0-4588-8276-1c545911e44f",
+                              "type": "user",
+                              "name": "bob@example.com"
+                          },
+                          "flattenedRecipients": [
+                              {
+                                  "id": "acd9af98-e3c0-4588-8276-1c545911e44f",
+                                  "type": "user",
+                                  "name": "bob@example.com"
+                              }
+                          ]
+                      }
+                  ]
+              }
+          ]
+      }
+  },
+  "expandable": [
+      "base",
+      "forwarding",
+      "override"
+  ],
+  "took": 0.418,
+  "requestId": "6ade5365-714f-43a7-b556-4bd495c9b45d"
+}
