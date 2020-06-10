@@ -1,6 +1,7 @@
 class TeamMember < ApplicationRecord
   has_many :assignments
   has_many :projects, through: :assignments
+  has_many :support_days
 
   validates_presence_of :first_name
   validates_uniqueness_of :tenk_id

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_172512) do
+ActiveRecord::Schema.define(version: 2020_06_10_175434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 2020_06_10_172512) do
     t.string "client"
     t.boolean "archived"
     t.integer "tenk_id", null: false
+  end
+
+  create_table "support_days", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "team_member_id", null: false
+    t.date "date"
+    t.string "support_type"
+    t.index ["team_member_id"], name: "index_support_days_on_team_member_id"
   end
 
   create_table "team_members", force: :cascade do |t|
