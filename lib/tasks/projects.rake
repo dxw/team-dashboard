@@ -1,4 +1,5 @@
 require 'dotenv/tasks'
+require 'tenk/client'
 
 namespace :projects do
   desc 'Fetch a list of users and their projects from 10,000ft'

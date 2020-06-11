@@ -14,20 +14,13 @@ class FetchProjects
     end
   end
 
-  private def tenk
-    @tenk = Tenk.new(
-      user_id: ENV.fetch('TENK_USER_ID'),
-      password: ENV.fetch('TENK_PASSWORD'),
-    )
-  end
-
   private def users
-    tenk.users.list(per_page: 100).data
+    TENK_CLIENT.users.list(per_page: 100).data
   end
 
   private def projects
     Hash.new { |hash, project_id|
-      hash[project_id] = tenk.projects.get(project_id)
+      hash[project_id] = TENK_CLIENT.projects.get(project_id)
     }
   end
 
@@ -74,7 +67,7 @@ class FetchProjects
   end
 
   private def get_user_assignment(user)
-    assignments = tenk.users.assignments.list(
+    assignments = TENK_CLIENT.users.assignments.list(
       user.id,
       from: Date.yesterday,
       to: Date.tomorrow,
