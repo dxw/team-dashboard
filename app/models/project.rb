@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  TENK_ID_FOR_SUPPORT = 2360793
+
   has_many :assignments
   has_many :team_members, through: :assignments
 
