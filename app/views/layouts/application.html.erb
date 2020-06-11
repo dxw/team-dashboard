@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TeamDashboard</title>
+    <title><%= content_for?(:html_title) ? yield(:html_title) : "Team Dashboard" %></title>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
