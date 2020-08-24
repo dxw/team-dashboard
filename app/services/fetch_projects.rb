@@ -4,6 +4,8 @@ class FetchProjects
       puts user.display_name
       team_member = create_team_member(user)
 
+      team_member.assignments.destroy_all
+
       assignments = current_user_assignments(user)
       assignments.each do |assignment|
         create_assignment(assignment, team_member)
@@ -60,7 +62,7 @@ class FetchProjects
     unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
       project = create_or_update_project(assignable_project)
 
-      team_member.projects << project unless team_member.projects.include?(project)
+      team_member.assignments.create(project: project) unless team_member.projects.include?(project)
     end
   end
 
