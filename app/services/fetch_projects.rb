@@ -10,8 +10,6 @@ class FetchProjects
       assignments.each do |assignment|
         create_assignment(assignment, team_member)
       end
-
-      team_member.save!
     end
   end
 
@@ -41,6 +39,7 @@ class FetchProjects
       thumbnail: user.thumbnail,
       billable: user.billable
     }
+    team_member.save!
     team_member
   end
 
