@@ -6,7 +6,7 @@ class FetchProjects
 
       assignments = current_user_assignments(user)
       assignments.each do |assignment|
-        create_projects(assignment, team_member)
+        create_assignment(assignment, team_member)
       end
 
       team_member.save!
@@ -42,7 +42,7 @@ class FetchProjects
     team_member
   end
 
-  private def create_projects(assignment, team_member)
+  private def create_assignment(assignment, team_member)
     puts "Assignable id: #{assignment.assignable_id}"
 
     assignable_project = projects[assignment.assignable_id]
