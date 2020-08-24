@@ -72,7 +72,7 @@ class FetchProjects
   end
 
   private def current_user_assignments(user)
-    assignments = tenk.users.assignments.list(
+    tenk.users.assignments.list(
       user.id,
       from: Date.yesterday,
       to: Date.tomorrow,
