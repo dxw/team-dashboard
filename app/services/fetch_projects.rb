@@ -55,20 +55,25 @@ class FetchProjects
 
     if assignable_project.name
       unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
-        project = Project.find_or_initialize_by(tenk_id: assignable_project.id)
-
-        project.attributes = {
-          name: assignable_project.name,
-          starts_at: assignable_project.starts_at,
-          ends_at: assignable_project.ends_at,
-          client: assignable_project.client,
-          archived: assignable_project.archived
-        }
-        project.save!
+        project = create_or_update_project(assignable_project)
 
         team_member.projects << project unless team_member.projects.include?(project)
       end
     end
+  end
+
+  private def create_or_update_project(assignable_project)
+    project = Project.find_or_initialize_by(tenk_id: assignable_project.id)
+
+    project.attributes = {
+      name: assignable_project.name,
+      starts_at: assignable_project.starts_at,
+      ends_at: assignable_project.ends_at,
+      client: assignable_project.client,
+      archived: assignable_project.archived
+    }
+    project.save!
+    project
   end
 
   private def current_user_assignments(user)
