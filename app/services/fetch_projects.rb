@@ -4,8 +4,7 @@ class FetchProjects
       puts user.display_name
       team_member = create_team_member(user)
 
-      assignments = get_user_assignment(user)
-
+      assignments = current_user_assignments(user)
       assignments.each do |assignment|
         create_projects(assignment, team_member)
       end
@@ -72,7 +71,7 @@ class FetchProjects
     end
   end
 
-  private def get_user_assignment(user)
+  private def current_user_assignments(user)
     assignments = tenk.users.assignments.list(
       user.id,
       from: Date.yesterday,
