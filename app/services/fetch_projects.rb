@@ -46,19 +46,21 @@ class FetchProjects
     puts "Assignable id: #{assignment.assignable_id}"
 
     assignable_project = projects[assignment.assignable_id]
+    return unless assignable_project.id
+
+    puts "Project #{assignable_project.name} (#{assignable_project.id})"
+
     while assignable_project.parent_id
-      puts "#{assignable_project.name} (#{assignable_project.id}), phase of #{assignable_project.parent_id}"
       assignable_project = projects[assignable_project.parent_id]
+      puts "\tis a phase of project #{assignable_project.name} (#{assignable_project.id})"
     end
 
-    puts "#{projects[assignable_project.id].tags&.data&.map(&:value)};"
+    puts "Tags: #{assignable_project.tags.data.map(&:value)}"
 
-    if assignable_project.name
-      unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
-        project = create_or_update_project(assignable_project)
+    unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
+      project = create_or_update_project(assignable_project)
 
-        team_member.projects << project unless team_member.projects.include?(project)
-      end
+      team_member.projects << project unless team_member.projects.include?(project)
     end
   end
 
