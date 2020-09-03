@@ -26,5 +26,4 @@ RSpec.feature "Users can see a list of projects", type: "feature" do
       expect(page).not_to have_content(inactive_project.name)
     end
   end
-
 end
