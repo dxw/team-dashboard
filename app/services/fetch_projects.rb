@@ -6,9 +6,9 @@ class FetchProjects
 
       team_member.assignments.destroy_all
 
-      assignments = current_user_assignments(user)
-      assignments.each do |assignment|
-        create_assignment(assignment, team_member)
+      tenk_assignments = current_tenk_assignments(user)
+      tenk_assignments.each do |tenk_assignment|
+        create_assignment(tenk_assignment, team_member)
       end
     end
   end
@@ -79,7 +79,7 @@ class FetchProjects
     project
   end
 
-  private def current_user_assignments(user)
+  private def current_tenk_assignments(user)
     tenk.users.assignments.list(
       user.id,
       from: Date.yesterday,
