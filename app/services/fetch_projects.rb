@@ -43,37 +43,37 @@ class FetchProjects
     team_member
   end
 
-  private def create_assignment(assignment, team_member)
-    puts "Assignable id: #{assignment.assignable_id}"
+  private def create_assignment(tenk_assignment, team_member)
+    puts "Assignable id: #{tenk_assignment.assignable_id}"
 
-    assignable_project = projects[assignment.assignable_id]
-    return unless assignable_project.id
+    tenk_project = projects[tenk_assignment.assignable_id]
+    return unless tenk_project.id
 
-    puts "Project #{assignable_project.name} (#{assignable_project.id})"
+    puts "Project #{tenk_project.name} (#{tenk_project.id})"
 
-    while assignable_project.parent_id
-      assignable_project = projects[assignable_project.parent_id]
-      puts "\tis a phase of project #{assignable_project.name} (#{assignable_project.id})"
+    while tenk_project.parent_id
+      tenk_project = projects[tenk_project.parent_id]
+      puts "\tis a phase of project #{tenk_project.name} (#{tenk_project.id})"
     end
 
-    puts "Tags: #{assignable_project.tags.data.map(&:value)}"
+    puts "Tags: #{tenk_project.tags.data.map(&:value)}"
 
-    unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
-      project = create_or_update_project(assignable_project)
+    unless tenk_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
+      project = create_or_update_project(tenk_project)
 
       team_member.assignments.create(project: project) unless team_member.projects.include?(project)
     end
   end
 
-  private def create_or_update_project(assignable_project)
-    project = Project.find_or_initialize_by(tenk_id: assignable_project.id)
+  private def create_or_update_project(tenk_project)
+    project = Project.find_or_initialize_by(tenk_id: tenk_project.id)
 
     project.attributes = {
-      name: assignable_project.name,
-      starts_at: assignable_project.starts_at,
-      ends_at: assignable_project.ends_at,
-      client: assignable_project.client,
-      archived: assignable_project.archived
+      name: tenk_project.name,
+      starts_at: tenk_project.starts_at,
+      ends_at: tenk_project.ends_at,
+      client: tenk_project.client,
+      archived: tenk_project.archived
     }
     project.save!
     project
