@@ -4,13 +4,12 @@ class FetchProjects
       puts user.display_name
       team_member = create_team_member(user)
 
-      assignments = get_user_assignment(user)
+      team_member.assignments.destroy_all
 
-      assignments.each do |assignment|
-        create_projects(assignment, team_member)
+      tenk_assignments = current_tenk_assignments(user)
+      tenk_assignments.each do |tenk_assignment|
+        create_assignment(tenk_assignment, team_member)
       end
-
-      team_member.save!
     end
   end
 
@@ -40,40 +39,48 @@ class FetchProjects
       thumbnail: user.thumbnail,
       billable: user.billable
     }
+    team_member.save!
     team_member
   end
 
-  private def create_projects(assignment, team_member)
-    puts "Assignable id: #{assignment.assignable_id}"
+  private def create_assignment(tenk_assignment, team_member)
+    puts "Assignable id: #{tenk_assignment.assignable_id}"
 
-    assignable_project = projects[assignment.assignable_id]
-    while assignable_project.parent_id
-      puts "#{assignable_project.name} (#{assignable_project.id}), phase of #{assignable_project.parent_id}"
-      assignable_project = projects[assignable_project.parent_id]
+    tenk_project = projects[tenk_assignment.assignable_id]
+    return unless tenk_project.id
+
+    puts "Project #{tenk_project.name} (#{tenk_project.id})"
+
+    while tenk_project.parent_id
+      tenk_project = projects[tenk_project.parent_id]
+      puts "\tis a phase of project #{tenk_project.name} (#{tenk_project.id})"
     end
 
-    puts "#{projects[assignable_project.id].tags&.data&.map(&:value)};"
+    puts "Tags: #{tenk_project.tags.data.map(&:value)}"
 
-    if assignable_project.name
-      unless assignable_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
-        project = Project.find_or_initialize_by(tenk_id: assignable_project.id)
+    unless tenk_project.tags.data.any? { |custom_field| custom_field.has_value?("cyber")  }
+      project = create_or_update_project(tenk_project)
 
-        project.attributes = {
-          name: assignable_project.name,
-          starts_at: assignable_project.starts_at,
-          ends_at: assignable_project.ends_at,
-          client: assignable_project.client,
-          archived: assignable_project.archived
-        }
-        project.save!
-
-        team_member.projects << project unless team_member.projects.include?(project)
-      end
+      team_member.assignments.create(project: project) unless team_member.projects.include?(project)
     end
   end
 
-  private def get_user_assignment(user)
-    assignments = tenk.users.assignments.list(
+  private def create_or_update_project(tenk_project)
+    project = Project.find_or_initialize_by(tenk_id: tenk_project.id)
+
+    project.attributes = {
+      name: tenk_project.name,
+      starts_at: tenk_project.starts_at,
+      ends_at: tenk_project.ends_at,
+      client: tenk_project.client,
+      archived: tenk_project.archived
+    }
+    project.save!
+    project
+  end
+
+  private def current_tenk_assignments(user)
+    tenk.users.assignments.list(
       user.id,
       from: Date.yesterday,
       to: Date.tomorrow,

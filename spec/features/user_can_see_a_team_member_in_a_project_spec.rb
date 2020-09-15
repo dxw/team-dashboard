@@ -26,5 +26,4 @@ RSpec.feature 'user can see team members within a project', type: 'feature' do
       expect(page).to have_content(member.name).twice
     end
   end
-
 end

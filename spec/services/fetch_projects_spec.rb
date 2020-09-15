@@ -34,6 +34,34 @@ RSpec.describe FetchProjects do
       # Team members and projects are linked together
       expect(team_member.projects).to include(project)
     end
+
+    it "recreates assignments" do
+      team_member = TeamMember.create(first_name: "Jay", last_name: "Smith", tenk_id: 387517)
+      old_project = Project.new(name: 'A Project', tenk_id: 404)
+      team_member.assignments.create(project: old_project)
+      expect(team_member.projects).to include(old_project)
+
+      described_class.new.call
+
+      expect(team_member.projects).not_to include(old_project)
+    end
+
+    context "when a project with that assignable_id cannot be found" do
+      let(:ghost_project) { Tenk::Client::Response.new(id: nil, name: nil) }
+
+      it "skips over that assignment" do
+        fake_tenk_projects_object = double(Tenk::Projects)
+        allow(fake_tenk_client).to receive(:projects).and_return(fake_tenk_projects_object)
+        allow(fake_tenk_projects_object).to receive(:get)
+          .with(123)
+          .and_return(ghost_project)
+
+        described_class.new.call
+
+        team_member = TeamMember.find_by(tenk_id: 387517)
+        expect(team_member.projects).to be_empty
+      end
+    end
   end
 
   def fake_tenk_client
@@ -57,7 +85,7 @@ RSpec.describe FetchProjects do
     allow(fake_tenk_projects_object).to receive(:get)
       .with(123)
       .and_return(fake_tenk_project)
-    end
+  end
 
   def fetch_team_members_from_tenk_set_up
     # Stub the fetching of team members from tenk
