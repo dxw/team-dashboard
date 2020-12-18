@@ -1,5 +1,5 @@
 class Project < ApplicationRecord
-  TENK_ID_FOR_SUPPORT = 2360793
+  TENK_ID_FOR_SUPPORT = ENV.fetch("TENK_ID_FOR_SUPPORT")
 
   has_many :assignments
   has_many :team_members, through: :assignments
