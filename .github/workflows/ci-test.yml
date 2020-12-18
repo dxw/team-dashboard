@@ -18,13 +18,9 @@ jobs:
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-      - uses: actions/checkout@v1
-      - name: Set Ruby version to use
-        run: |
-          echo "::set-env name=RUBY_VERSION::$(cat .ruby-version)"
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "2.6.5"
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
       - name: Install dependencies
         env:
           GITHUB_TOKEN: ${{ secrets.DXW_TOKEN }}
