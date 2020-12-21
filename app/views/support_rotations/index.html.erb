@@ -1,0 +1,63 @@
+<% content_for(:html_title) { 'Support Rotations Dashboard' } %>
+
+<%= stylesheet_link_tag 'support', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<body>
+  <h1>Support rotations</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Period starting</th>
+        <th>Period ending</th>
+        <th>Developer</th>
+        <th>Ops engineer</th>
+        <th>OoH (1st line)</th>
+        <th>OoH (2nd line)</th>
+        <th>Affected projects (dev and ops)</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @intervals.each do |_cweek, intervals| %>
+        <%
+          week_start = intervals.first.start_date
+          week_end = intervals.last.end_date
+          row_class = row_class_for_interval(week_start, week_end)
+        %>
+
+        <tr class="<%= row_class %>">
+          <td rowspan="<%= intervals.size %>">
+            <%= prettify_date(week_start) %>
+          </td>
+          <td rowspan="<%= intervals.size %>">
+            <%= prettify_date(week_end) %>
+          </td>
+
+        <% intervals.each do |interval| %>
+
+          <% unless interval == intervals.first %>
+        <tr class="<%= row_class %>">
+          <% end %>
+
+          <td class="<%= cell_class(interval.developer_name) %>">
+            <%= interval.developer_name %>
+          </td>
+          <td class="<%= cell_class(interval.ops_eng_name) %>">
+            <%= interval.ops_eng_name %>
+          </td>
+          <td class="<%= cell_class(interval.ooh1_person_name) %>">
+            <%= interval.ooh1_person_name %>
+          </td>
+          <td class="<%= cell_class(interval.ooh2_person_name) %>">
+            <%= interval.ooh2_person_name %>
+          </td>
+          <td>
+            <%= interval.affected_projects %>
+          </td>
+        </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</body>
