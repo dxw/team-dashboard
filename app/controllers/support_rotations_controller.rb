@@ -60,7 +60,7 @@ class SupportRotationsController < ApplicationController
 
     def affected_projects
       in_hours_projects = (first_line_dev.projects + first_line_ops.projects).uniq
-      client_projects = in_hours_projects.select { |p| p.tenk_id != Project::TENK_ID_FOR_SUPPORT }
+      client_projects = in_hours_projects.select { |p| p.tenk_id.to_s != Project::TENK_ID_FOR_SUPPORT }
       client_projects.select do |project|
         start_date <= Date.parse(project.ends_at) &&
           end_date >= Date.parse(project.starts_at)
