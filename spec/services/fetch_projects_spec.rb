@@ -62,6 +62,33 @@ RSpec.describe FetchProjects do
         expect(team_member.projects).to be_empty
       end
     end
+
+    context "when optional team member attributes are nil" do
+      it "creates the team member" do
+        user_no_discipline = Hashie::Array[
+                                Tenk::Client::Response.new(
+                                  billable: true,
+                                  discipline: nil,
+                                  email: nil,
+                                  first_name: "Tom",
+                                  id: 387517,
+                                  last_name: nil,
+                                  thumbnail: "https://fake.thumbnail/123",
+                                  type: "User",
+                                )
+                              ]
+
+        allow(fake_tenk_users_object).to receive_message_chain(:list, :data)
+          .and_return(user_no_discipline)
+
+        described_class.new.call
+
+        team_member = TeamMember.find_by(tenk_id: 387517)
+        expect(team_member.discipline).to be_nil
+        expect(team_member.last_name).to be_nil
+        expect(team_member.email).to be_nil
+      end
+    end
   end
 
   def fake_tenk_client
