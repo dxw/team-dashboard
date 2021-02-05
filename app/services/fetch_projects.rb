@@ -34,9 +34,9 @@ class FetchProjects
     team_member = TeamMember.find_or_initialize_by(tenk_id: user.id)
     team_member.attributes = {
       first_name: user.first_name.strip,
-      last_name: user.last_name.strip,
-      email: user.email.downcase.strip,
-      discipline: user.discipline.strip,
+      last_name: user.last_name&.strip,
+      email: user.email&.downcase&.strip,
+      discipline: user.discipline&.strip,
       thumbnail: user.thumbnail,
       billable: user.billable
     }
